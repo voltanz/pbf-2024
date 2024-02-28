@@ -146,3 +146,90 @@ export default function Bio() {
 Output:
 
 ![Output](docs/soal3.png)
+
+
+## Praktikum 3: Menggunakan JSX dinamis
+
+### **Langkah 1: Buat Komponen Baru**
+Buatlah file baru di `src/components/todolist.tsx` berisi kode seperti berikut:
+```tsx
+const person = {
+  name: 'Gregorio Y. Zara',
+  theme: {
+    backgroundColor: 'black',
+    color: 'pink'
+  }
+};
+
+export default function TodoList() {
+  return (
+    <div style={person.theme}>
+      <h1>{person}'s Todos</h1>
+      <img
+        className="avatar"
+        src="https://i.imgur.com/7vQD0fPs.jpg"
+        alt="Gregorio Y. Zara"
+      />
+      <ul>
+        <li>Improve the videophone</li>
+        <li>Prepare aeronautics lectures</li>
+        <li>Work on the alcohol-fuelled engine</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+>Soal 4
+>
+>Kode di atas masih terdapat error, silakan diperbaiki.
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 4"`.
+
+Jawab:
+
+Terjadi error di kode bagian
+```tsx
+<h1>{person}'s Todos</h1>
+```
+karena penggunaan objek dan properti nya tidak lengkap.
+
+Kode yang benar:
+```tsx
+<h1>{person.name}'s Todos</h1>
+```
+
+### **Langkah 2: Impor Komponen**
+
+Lakukan impor komponen di `src/app/page.tsx` seperti berikut ini.
+
+```tsx
+import { Gallery } from "@/components/gallery";
+import TodoList from "@/components/todolist";
+
+export default function Home() {
+  return (
+    <section>
+      <h1 className="font-semibold text-slate-900 truncate pr-20 text-center">Ilmuwan yang luar biasa</h1>
+      <hr />
+      <Gallery />
+      <hr />
+      <TodoList />
+    </section>
+  );
+}
+```
+
+>Soal 5
+>
+>Buka file `src/components/todolist.tsx` lakukan ekstrak URL gambar ke dalam objek `person`.
+>
+>Capture hasilnya dan buatlah laporan di **README.md.** Apakah ada perbedaan pada tampilan web saat ini?
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 5"`.
+
+Jawab: 
+
+![Output](docs/soal5.png)
+
+Tidak ada perbedaan pada tampilan
