@@ -233,3 +233,72 @@ Jawab:
 ![Output](docs/soal5.png)
 
 Tidak ada perbedaan pada tampilan
+
+### **Langkah 3: Ubah ekspresi URL di src**
+
+Tetap di file `src/components/todolist.tsx` ubahlah objek person dan tambah variabel baseUrl seperti di bawah ini. URL lengkap gambar dibagi menjadi empat bagian: URL dasar, `imageId`, `imageSize`, dan ekstensi file.
+
+Kita ingin URL gambar menggabungkan atribut-atribut ini bersama-sama: URL dasar (selalu `'https://i.imgur.com/'`), `imageId ('7vQD0fP')`, `imageSize ('s')`, dan ekstensi file (selalu `'.jpg'`). Namun, ada yang salah dengan atribut `src`.
+
+Bisakah anda memperbaikinya?
+```tsx
+const baseUrl = 'https://i.imgur.com/';
+const person = {
+  name: 'Gregorio Y. Zara',
+  imageId: '7vQD0fP',
+  imageSize: 's',
+  theme: {
+    backgroundColor: 'black',
+    color: 'pink'
+  }
+};
+
+export default function TodoList() {
+  return (
+    <div style={person.theme}>
+      <h1>{person.name}'s Todos</h1>
+      <img
+        className="avatar"
+        src="{baseUrl}{person.imageId}{person.imageSize}.jpg"
+        alt={person.name}
+      />
+      <ul>
+        <li>Improve the videophone</li>
+        <li>Prepare aeronautics lectures</li>
+        <li>Work on the alcohol-fuelled engine</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+>Soal 6
+>
+>Perbaiki kode tersebut pada bagian atribut `src`. Kode lainnya dapat Anda sesuaikan dari jawaban soal sebelumnya. Capture hasilnya dan buatlah laporan di **README.md**. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 6"`.
+>
+>Catatan:
+>
+>Untuk memeriksa apakah perbaikan Anda berhasil, coba ubah nilai dari `imageSize` menjadi `'b'`. Gambar harus menyesuaikan ukuran setelah diubah.
+
+Jawab:
+
+terdapat error pada kode yang berupa penulisan url yang tidak tepat
+```tsx
+src="{baseUrl}{person.imageId}{person.imageSize}.jpg"
+```
+
+kode yang benar:
+```tsx
+src={`${baseUrl}${person.imageId}${person.imageSize}.jpg`}
+```
+Output:
+
+***Image size s***
+![Output](docs/soal6.png)
+
+***Image size b***
+![Output](docs/soal6b.png)
+
+Penggunaan image size 's' dan 'b' memberikan perbedaan ukuran pada gambar
