@@ -302,3 +302,86 @@ Output:
 ![Output](docs/soal6b.png)
 
 Penggunaan image size 's' dan 'b' memberikan perbedaan ukuran pada gambar
+
+
+## Praktikum 4: Menggunakan Props
+
+### **Langkah 1: Buat Komponen Baru**
+Buatlah file baru di `src/components/mygallery.tsx` berisi kode seperti berikut:
+```tsx
+import { getImageUrl } from '@/utils/utils';
+
+export default function MyGallery() {
+  return (
+    <div>
+      <h1>Notable Scientists</h1>
+      <section className="profile">
+        <h2>Maria Skłodowska-Curie</h2>
+        <img
+          className="avatar"
+          src={getImageUrl('szV5sdG')}
+          alt="Maria Skłodowska-Curie"
+          width={70}
+          height={70}
+        />
+        <ul>
+          <li>
+            <b>Profesi: </b> 
+            Fisikawan dan kimiawan
+          </li>
+          <li>
+            <b>Penghargaan: 4 </b> 
+            (Penghargaan Nobel Fisika, Penghargaan Nobel Kimia, Medali Davy, Medali Matteucci)
+          </li>
+          <li>
+            <b>Telah Menemukan: </b>
+            polonium (unsur kimia)
+          </li>
+        </ul>
+      </section>
+      <section className="profile">
+        <h2>Katsuko Saruhashi</h2>
+        <img
+          className="avatar"
+          src={getImageUrl('YfeOqp2')}
+          alt="Katsuko Saruhashi"
+          width={70}
+          height={70}
+        />
+        <ul>
+          <li>
+            <b>Profesi: </b> 
+            Ahli Geokimia
+          </li>
+          <li>
+            <b>Penghargaan: 2 </b> 
+            (Penghargaan Miyake Geokimia, Penghargaan Tanaka)
+          </li>
+          <li>
+            <b>Telah Menemukan: </b>
+            sebuah metode untuk mengukur karbon dioksida pada air laut
+          </li>
+        </ul>
+      </section>
+    </div>
+  );
+}
+```
+
+>**Soal 7**
+>
+>Jika kode di atas terdapat error, silakan diperbaiki.
+>
+>Komponen `MyGallery` ini berisi dua markup yang sama persis. Ekstraklah menjadi komponen `MyProfile` untuk mengurangi duplikasi. Anda perlu memilih props apa saja yang akan dikirimkan.
+>
+>Capture hasilnya dan buatlah laporan di **README.md.** Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 7"`.
+
+Jawab:
+
+Terdapat error pada penggunaan getImageUrl pada @/utils/utils dikarenakan fungsi tersebut akan dibuat pada langkah berikutnya.
+
+![Output](docs/soal7.png)
+ 
+ 

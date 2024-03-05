@@ -2,6 +2,7 @@ import Image from "next/image";
 import Profile from "../components/profile";
 import { Gallery } from "@/components/gallery";
 import TodoList from "@/components/todolist";
+import MyGallery from "@/components/mygalerry";
 
 
 export default function Home() {
@@ -18,12 +19,15 @@ export default function Home() {
     //   </div>
     //   { <Gallery /> }
     // </main>
+    // <section>
+    //   <h1 className="font-semibold text-slate-900 truncate pr-20 text-center">Ilmuwan yang luar biasa</h1>
+    //   <hr />
+    //   <Gallery />
+    //   <hr />
+    //   <TodoList />
+    // </section>
     <section>
-      <h1 className="font-semibold text-slate-900 truncate pr-20 text-center">Ilmuwan yang luar biasa</h1>
-      <hr />
-      <Gallery />
-      <hr />
-      <TodoList />
+      <MyGallery></MyGallery>
     </section>
   );
 }
