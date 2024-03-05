@@ -1,4 +1,4 @@
-import getImageUrl from '@/utils/utils';
+import { getImageUrl } from '../utils/utils';
 
 export default function MyGallery() {
   return (

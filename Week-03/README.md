@@ -384,4 +384,92 @@ Terdapat error pada penggunaan getImageUrl pada @/utils/utils dikarenakan fungsi
 
 ![Output](docs/soal7.png)
  
- 
+
+ ### **Langkah 2: Buat fungsi getImageUrl**
+
+Buatlah file baru di `src/utils/utils.tsx` berisi kode seperti berikut:
+```tsx
+export function getImageUrl(imageId, size = 's') {
+  return (
+    'https://i.imgur.com/' +
+    imageId +
+    size +
+    '.jpg'
+  );
+}
+```
+
+### **Langkah 3: Buat komponen baru**
+Buatlah file baru di `src/components/myprofile.tsx` berisi kode seperti berikut:
+```tsx
+import { getImageUrlV2 } from '@/utils/utils';
+
+function MyAvatar({ person, size }) {
+  return (
+    <img
+      className="avatar"
+      src={getImageUrl(person, 'b')}
+      alt={person.name}
+      width={size}
+      height={size}
+    />
+  );
+}
+
+export default function MyProfile() {
+  return (
+    <MyAvatar
+      size={40}
+      person={{ 
+        name: 'Gregorio Y. Zara', 
+        imageId: '7vQD0fP'
+      }}
+    />
+  );
+}
+```
+Tambahkan fungsi `getImageUrlV2` seperti berikut di file yang sama yaitu `utils.tsx`
+
+**`src/utils/utils.tsx`**
+```tsx
+export function getImageUrlV2(person, size) {
+  return (
+    'https://i.imgur.com/' +
+    person.imageId +
+    size +
+    '.jpg'
+  );
+}
+```
+Pada contoh ini, komponen `MyAvatar` menerima prop `size` yang berupa angka dan akan digunakan untuk menentukan lebar dan tinggi `< img >`. Prop `size` dibuat `40` pada contoh ini. Bagaimanapun, jika Anda membuka gambar tersebut di web, Anda akan melihat bahwa gambarnya akan lebih besar (`160` piksel). Ukuran gambar yang sebenarnya ditentukan oleh ukuran thumbnail yang Anda minta.
+
+>**Soal 8**
+>
+>Jika kode di atas terdapat error, silakan diperbaiki.
+>
+>Ubahlah komponen `MyAvatar` untuk diolah ukuran gambarnya berdasarkan prop `size`. Khususnya, jika `size` kurang dari `90`, kirimkan `'s'` ("small") bukan `'b'` ("big") pada fungsi `getImageUrl`. Pastikan bahwa perubahan yang Anda buat berjalan dengan cara me-render avatars dengan nilai prop `size` yang berbeda dan buka gambar pada tab baru di browser.
+>
+>Capture hasilnya dan buatlah laporan di **README.md**. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 8"`.
+
+Jawab:
+
+Sebelumnya terdapat permasalahan di url gambar, lalu saya merubah penggunaan parameter seperti kode dibawah agar url yang diberikan dapat menghasilkan gambar.
+```tsx
+function MyAvatar({ person, size }: {person: Person; size: number}) {
+    let imgSize = size < 90 ? 's' : 'b';
+  return (
+    <img
+      className="avatar"
+      src={getImageUrlV2(person, imgSize)}
+      alt={person.name}
+      width={size}
+      height={size}
+    />
+  );
+}
+```
+Dan untuk menentukan size 's' atau 'b' dari URL gambar, maka dapat digunakan ternary operator dengan merubah value angka seperti gambar dibawah ini.
+
+![Output](docs/soal8.png)
