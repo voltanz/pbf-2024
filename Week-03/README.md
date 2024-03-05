@@ -473,3 +473,50 @@ function MyAvatar({ person, size }: {person: Person; size: number}) {
 Dan untuk menentukan size 's' atau 'b' dari URL gambar, maka dapat digunakan ternary operator dengan merubah value angka seperti gambar dibawah ini.
 
 ![Output](docs/soal8.png)
+
+
+### **Langkah 4: Buat komponen baru MyProfileV2**
+Buatlah file baru di `src/components/myprofilev2.tsx` berisi kode seperti berikut:
+
+```tsx
+export default function MyProfileV2() {
+  return (
+    <div>
+      <div className="card">
+        <div className="card-content">
+          <h1>Foto</h1>
+          <img
+            className="avatar"
+            src="https://i.imgur.com/OKS67lhm.jpg"
+            alt="Aklilu Lemma"
+            width={70}
+            height={70}
+          />
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-content">
+          <h1>Tentang</h1>
+          <p>Aklilu Lemma adalah seorang ilmuwan terkemuka dari etiopia yang telah menemukan pengobatan alami untuk skistosomiasis.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+>**Soal 9**
+>
+>Jika kode di atas terdapat error, silakan diperbaiki.
+>
+>Buatlah komponen `Card` dari kode di atas, lalu gunakan prop `children` untuk mengirimkan JSX yang berbeda.
+>
+>Capture hasilnya dan buatlah laporan di **README.md**. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?
+>
+>Jangan lupa push dengan pesan commit: `"W03: Jawaban soal 9"`.
+
+Jawab:
+
+![Output](docs/soal9.png)
+
+Dengan membuat function Card, penulisan tag yang berulang seperti card tersebut, dapat ditulis sekali saja dalam function, kemudian dengan function tersebut, komponen yang sama dapat digunakan diparent dengan penulisan yang lebih singkat.
