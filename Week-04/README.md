@@ -621,3 +621,151 @@ export function Form_2() {
 Jalankan pada browser dan amati apa yang terjadi.
 
 ![Output](docs/ss13.png)
+
+<br>
+<br>
+
+**Berbagi state antar komponen**
+
+### **Praktikum 6**
+
+**Langkah 1**
+Kita buat file komponen pada `src/components/accordion.tsx`
+```tsx
+import { useState } from 'react';
+
+export default function Accordion() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    return (
+        <>
+            <h2>Almaty, Kazakhstan</h2>
+            <Panel
+                title="About"
+                isActive={activeIndex === 0}
+                onShow={() => setActiveIndex(0)}
+            >
+                Dengan populasi sekitar 2 juta orang, Almaty adalah kota terbesar di Kazakhstan.
+                Dari tahun 1929 hingga 1997, kota ini menjadi ibu kota Kazakhstan.
+            </Panel>
+            <Panel
+                title="Etymology"
+                isActive={activeIndex === 1}
+                onShow={() => setActiveIndex(1)}
+            >
+                Nama "Almaty" berasal dari kata <span lang="kk-Kz">алма</span>, 
+                dalam bahasa Kazakh yang berarti "apel" dan sering diterjemahkan sebagai "penuh dengan apel". 
+                Sebenarnya, wilayah sekitar Almaty dipercaya sebagai asal usul apel, dan <i lang="la">Malus sieversii</i> 
+                liar dianggap sebagai kandidat yang mungkin menjadi nenek moyang apel domestik modern.
+            </Panel>
+        </>
+    );
+}
+
+function Panel ({title, children, isActive, onShow}) {
+    return (
+        <section className="panel border border-gray-700 p-2">
+            <h3>{title}</h3>
+                {isActive ? ( <p>{children}</p> ) : ( <button className=" bg-blue-400 text-xs text-white p-1 rounded m-2" onClick={onShow}>Tampilkan</button> )}
+        </ section>
+    );
+}
+```
+Lalu kita tambahkan component `Accordion` ke file `page.tsx`
+```tsx
+import Accordion from "@/components/accordion";
+```
+```tsx
+    <br></br>
+<Accordion />
+    </>
+```
+Amati dan laporkan apa yang terjadi...!!!
+![Output](docs/ss14.png)
+![Output](docs/ss15.png)
+
+<br>
+<br>
+
+**Mempertahankan dan mengatur ulang state**
+
+**Tahap 2**
+
+Kita buat file di `src/components/chat.tsx`
+```tsx
+import { useState } from "react";
+
+const contacts = [
+    {name: 'Taylor', email: 'taylor@mail.com'},
+    {name: 'Alice', email: 'alice@mail.com'},
+    {name: 'Bob', email: 'bob@mail.com'},
+]
+
+export function ContactList({selectedContact, contacts, onSelect}: any) {
+    return (
+        <section className="contact-list">
+            <ul className="w-full">
+                {contacts.map((contact:any) =>
+                    <li key={contact.email}>
+                        <button className="text-xs bg-blue-400 rounded p-1 m-2 text-white"
+                            onClick={() => {onSelect(contact)}}>
+                                {contact.name}
+                            </button>
+                    </li>)}
+            </ul>
+        </section>
+    )
+}
+
+export function Chat({contact}: any) {
+    const [text, setText] = useState('')
+    return (
+        <section className="chat m-2">
+            <textarea
+            rows={5}
+            value={text}
+            placeholder={'Mengobrol dengan ' + contact.name}
+            onChange={e => setText(e.target.value)}/>
+            <br />
+            <button className="text-xs bg-gray-400 rounded px-2 py-1 m-2 text-blue-800">
+                Kirim ke {contact.email}
+            </button>
+        </section>
+    )
+}
+
+export default function Messenger() {
+    const [to, setTo] = useState(contacts[0])
+    return (
+        <div>
+            <table className="w-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">List Kontak</th>
+                        <th scope="col" className="px-6 py-3">Pesan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ContactList
+                                contacts={contacts}
+                                selectedContact={to}
+                                onSelect={(contact:any) => setTo(contact)}/>
+                        </td>
+                        <td>
+                            <Chat contact={to}/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    )
+}
+```
+
+Coba jalankan kembali pada browser, amati dan laporkan perbedaannya.
+
+Output:
+![Output](docs/ss16.png)
+
+Perbedaan yang terjadi adalah ketika tidak menggunakan key maka input text yang dimasukan di text area akan terbawa saat berpindah kontak, sedangkan saat menggunakan key, input text akan hilang jika berpindah kontak. 
