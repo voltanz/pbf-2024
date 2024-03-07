@@ -769,3 +769,15 @@ Output:
 ![Output](docs/ss16.png)
 
 Perbedaan yang terjadi adalah ketika tidak menggunakan key maka input text yang dimasukan di text area akan terbawa saat berpindah kontak, sedangkan saat menggunakan key, input text akan hilang jika berpindah kontak. 
+
+> **Soal**
+>
+> 1. Apa tujuan dari penulisan ini key={to.email} pada < Chat key={to email} contact={to} / > ?
+>
+> Jawab: Props tersebut ditunjukkan untuk memberikan identitas unik untuk setiap komponen, sehingga tidak akan dianggap sebagai komponen yang sama.
+>
+> 2. Apa fungsi dari props key tersebut?
+>
+> Jawab: Dengan menggunakan props key tersebut, maka suatu aksi akan berpengaruh ke komponen dengan key yang sesuai saja, tidak diterapkan ke semua komponen walaupun struktur nya sama,
+>
+> Silakan laporkan dan commit dengan judul **Jawaban Soal Praktikum 6**
