@@ -32,3 +32,64 @@ Output about/page.tsx
 
 Output profile/page.tsx
 ![Output](docs/ss2.png)
+
+
+## Praktikum 2: Membuat routing bersarang (Nested Routing)
+
+Anda dapat membuat routing bersarang, maksudnya ketika suatu link diklik di dalam link tersebut terdapat daftar link atau menu yang dapat diklik juga. Jadi, dalam praktikum ini akan dibuat susunan URL atau link seperti berikut:
+
+**Link utama** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Link bersarang**
+
+---
+/ 
+
+---
+/about
+
+---
+/blogs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /blogs/first
+
+---
+/blogs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /blogs/second
+
+---
+
+Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:
+
+1. Dengan menggunakan konsep yang sama pada Praktikum 1, silahkan tambahkan susunan folder /blogs/first dan /blogs/second. Kemudian tambahkan masing-masing untuk setiap folder dengan file page.tsx.
+2. Pada file /blogs/page.tsx buatlah function component seperti kode berikut atau anda dapat mengkreasikan tampilan dengan selera anda!
+```tsx
+export default function Blog() {
+  return (
+        <h1>Blog</h1>
+  );
+}
+```
+3. Pada file /blogs/first/page.tsx buatlah function component seperti berikut:
+```tsx
+export default function FirstBlog() {
+  return (
+        <h1>First Blog</h1>
+  );
+}
+```
+4. Cobalah akses halaman /blogs dan /blogs/first pada browser anda.
+
+>Todo: Lengkapi function component pada /blogs/second/page.tsx
+
+5. Lakukan commit ke project setelah melengkapi semua Praktikum 2 dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.
+
+>Pertanyaan: Apa kekurangan yang mungkin terjadi jika menggunakan pendekatan pada Praktikum 2 untuk menangani routing?
+
+Output blogs/page.tsx
+![Output](docs/ss3.png)
+
+Output blogs/first/page.tsx
+![Output](docs/ss4.png)
+
+Output blogs/second/page.tsx
+![Output](docs/ss5.png)
+
+Jawab: 
+
+Kekurangan yang mungkin terjadi jika menggunakan routing link bersarang adalah kompleksitas dan kerumitan dalam mengelola dan memahami struktur routing yang bersarang, saat aplikasi semakin berkembang dan memiliki banyak tingkatan routing yang bersarang, mungkin akan sulit untuk melacak dan memahami bagaimana setiap link saling terhubung.
