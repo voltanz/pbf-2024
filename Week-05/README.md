@@ -172,3 +172,41 @@ Output products/1/reviews/3.tsx
 Output Perbaiki implementasi Praktikum 2 menggunakan Dynamic Routes
 
 ![Output](docs/ss9.png)
+
+
+## Praktikum 4: Navigasi dengan Link Component
+
+Pada Praktikum sebelumnya Anda telah berhasil membuat routing, tetapi belum dapat menampilkan link navigasi di dalam Project. Untuk melakukan navigasi, anda dapat menggunakan Link komponen yang disediakan oleh library NextJs.
+
+Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:
+
+1. Pada file `/app/page.tsx` tambahkan import Link komponen seperti kode berikut.
+```tsx
+import Link from "next/link";
+```
+
+2. Tambahkan penggunaan Link komponen untuk mengakses halaman `/profile` dan `/about`
+```tsx
+export default function Home() {
+  return (
+        <div>
+          <h1>Welcome to Home</h1>
+          <Link href='/profile'>Profile</Link>
+          <Link href='/about'>About</Link>
+        </div>
+  );
+}
+```
+
+3. Coba buka browser anda dan cobalah untuk bernavigasi menggunakan Link komponen.
+
+>**Todo**: Tambahkan link yang sebelumnya anda telah kerjakan!
+
+4. **Lakukan commit ke project setelah melengkapi semua Praktikum 4** dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.
+
+
+Output
+
+![Output](docs/ss10.png)
+
+![Output](docs/ss11.png)
