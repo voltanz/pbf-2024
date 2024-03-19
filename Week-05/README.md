@@ -82,14 +82,93 @@ export default function FirstBlog() {
 >Pertanyaan: Apa kekurangan yang mungkin terjadi jika menggunakan pendekatan pada Praktikum 2 untuk menangani routing?
 
 Output blogs/page.tsx
+
 ![Output](docs/ss3.png)
 
 Output blogs/first/page.tsx
+
 ![Output](docs/ss4.png)
 
 Output blogs/second/page.tsx
+
 ![Output](docs/ss5.png)
 
 Jawab: 
 
 Kekurangan yang mungkin terjadi jika menggunakan routing link bersarang adalah kompleksitas dan kerumitan dalam mengelola dan memahami struktur routing yang bersarang, saat aplikasi semakin berkembang dan memiliki banyak tingkatan routing yang bersarang, mungkin akan sulit untuk melacak dan memahami bagaimana setiap link saling terhubung.
+
+
+## Praktikum 3: Membuat routing dinamis (Dynamic Routing)
+
+Anda dapat membuat routing secara dinamis, maksudnya ketika suatu link diakses akan ditambahkan dengan suatu url path yang nilainya dapat berubah secara dinamis. Jadi, dalam praktikum ini akan dibuat susunan URL atau link seperti berikut:
+
+**Link utama** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Link dinamis**
+
+---
+/products &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/products/1
+
+---
+/products &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/products/2
+
+---
+/products &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/products/3
+
+---
+Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:
+
+1. Buatlah file `/products/page.tsx` yang berisi function component untuk menampilkan list dari products seperti kode berikut.
+```tsx
+export default function ProductList() {
+  return (
+        <div>
+          <h1>Product List</h1>
+          <h2>Product 1</h2>
+          <h2>Product 2</h2>
+          <h2>Product 3</h2>
+        </div>
+  );
+}
+```
+2. Untuk mendefinisikan url path di NextJs menggunakan konvensi penamaan direktori dengan mengapit nama path dengan simbol `[ ]`. Sebagai contoh: `[productId]` menandakan bahwa path dinamis menggunakan variabel `productId` (Catatan: Anda boleh menuliskan hanya dengan `[id]`, tetapi untuk mempermudah pembacaan konteks sebaiknya jangan gunakan hanya `id`).
+3. Kemudian buatlah file `page.tsx` pada lokasi `/app/products/[productId]` dan tambahkan kode sebagai berikut.
+```tsx
+type Props = {
+  params: {
+        productId: string
+  }
+}
+
+export default function ProductDetails({ params }: Props) {
+  return (
+        <h1>Details about product {params.productId}</h1>
+  )
+}
+```
+4. Untuk mendapatkan nilai path, anda dapat menggunakan pemanggilan `params.productId`. Pemanggilan atribut `params`, disesuaikan dengan pendefinisian nama path.
+5. Cobalah akses halaman `/product`s dan `/products/1` pada browser anda. Ubah nilai `productId` dengan nilai lainnya.
+
+>**Todo 1**: Perbaiki implementasi Praktikum 2 menggunakan *Dynamic Routes*
+
+>**Todo 2**: Dengan menggunakan konsep Nested Routes dan Dynamic Routes, buatlah halaman dengan routing `/products/[productId]/reviews/[reviewId]`
+
+6. **Lakukan commit ke project setelah melengkapi semua Praktikum 3** dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.
+
+Output products/page.tsx
+
+![Output](docs/ss6.png)
+
+Output products/1.tsx
+
+![Output](docs/ss7.png)
+
+Output products/1.tsx
+
+![Output](docs/ss7.png)
+
+Output products/1/reviews/3.tsx
+
+![Output](docs/ss8.png)
+
+Output Perbaiki implementasi Praktikum 2 menggunakan Dynamic Routes
+
+![Output](docs/ss9.png)
