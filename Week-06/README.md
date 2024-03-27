@@ -355,3 +355,27 @@ Kemudian kita jalankan di browser dengan url **`localhost:3000/counter`**, dan a
 Output
 
 ![Output](docs/ss8.gif)
+
+## Tugas (Pertanyaan Praktikum)
+
+Berdasarkan pada praktikum sebelumnya yang telah dilakukan, beberapa pertanyaan terkait praktikum perlu diselesaikan yaitu sebagai berikut.
+
+1. Apa kegunaan dari kode ini `import { useEffect } from` `"react";` Pada `file pages/_app.tsx`? jelaskan
+2. Jika pada file `pages/_app.tsx` kita tidak menggunakan `useEffect` (menghapus baris 3, dan baris 9-11, apa yang akan terjadi?
+3. Mengapa di react/nextjs penulisan tag html untuk `class`, harus diganti menjadi `className` ?
+4. Apakah store pada nextjs bisa menyimpan banyak redux reducer?
+5. Jelaskan kegunaan dari file **`store.js`**!
+6. Pada file `pages/login.tsx`, apa maksud dari kode ini ?
+`const { isLogin } = useSelector((state) => state.auth);`
+7. Pada file pages/counter.tsx, apa maksud dari kode ini?
+`const {totalCounter} = useSelector((state) => state.counter);`
+
+Jawab:
+
+1. useEffect adalah salah satu dari banyak hooks yang disediakan oleh React. Hooks memungkinkan Anda untuk menggunakan fitur-fitur React di dalam komponen fungsional. useEffect khususnya digunakan untuk menangani efek samping dalam komponen fungsional. Efek samping ini bisa berupa pembuatan, pemutakhiran, atau penghapusan data, langganan ke data eksternal, atau pembaruan DOM
+2. Tidak ada hal signifikan yang terjadi karena tidak ada aksi apa apa ketika button tersebut di klik
+3. Agar tidak konflik dengan kata kunci class yang sudah ada di JavaScript
+4. Bisa, redux reducer bisa disimpan lebih dari satu di store, seperti contoh praktikum ada 2 reducer, authReducer dan counterReducer, keduanya berada di 1 state tree.
+5. Digunakan untuk mencatat apa saja redux yang digunakan, dan agar bisa digunakan harus ditamabahkan ke store.
+6. Digunakan untuk mengambil data yang berasal dari state.auth dan disimpan dalam variabel isLogin
+7. Untuk mengambil nilai counter saat ini yang sudah ditambah atau belum. Jadi totalCounter mengambil nilai state yang sudah ditambah atau dikurang menggunakan tombol tambahNilai() dan kurangNilai()
