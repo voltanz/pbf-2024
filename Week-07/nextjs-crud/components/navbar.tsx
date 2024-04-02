@@ -1,55 +1,3 @@
-# 07 | Next.js CRUD
-
-## Praktikum 1: Membuat Project Baru di Next.js
-
-### Langkah 1 - Membuat Project Baru
-
-```
-npx create-next-app nextjs-crud
-```
-
-![Output](docs/ss1.png)
-
-### Langkah 2 - Menjalankan Project Next.js
-
-```
-npm run dev
-```
-
-![Output](docs/ss2.png)
-
-
-## Praktikum 2: Install Bootsrap dan Membuat Layout di Next.js
-
-### Langkah 1 - Install Bootstrap
-
-```
-npm install bootstrap
-```
-
-![Output](docs/ss3.png)
-
-![Output](docs/ss1.png)
-
-### Langkah 2: Konfigurasi Boostrap di Next.js
-
-Tambahkan kode berikut di dalam file -app.tsx
-```ts
-import "bootstrap/dist/css/bootstrap.min.css";
-```
-
-Mengubah background dari aplikasi pada file styles/global.css
-```tsx
-body{
-  background: lightgray!important;
-}
-```
-
-
-### Langkah 3: Membuat Komponen Navbar
-
-Buat folder baru dengan nama `components` dan buat fila baru di dalam folder tersebut dengan nama `navbar.tsx`
-```tsx
 //import Link
 import Link from 'next/link';
 
@@ -87,22 +35,3 @@ function Navbar() {
 }
 
 export default Navbar
-```
-
-### Langkah 4: Membuat Layout
-
-Buat file baru di dalam folder `components` dengan nama `layout.tsx`
-kemudian masukan kode berikut
-```tsx
-//import component Navbar
-import Navbar from './navbar'
-
-export default function Layout({ children }) {
-  return (
-    <>
-      <Navbar />
-      <main>{children}</main>
-    </>
-  )
-}
-```
