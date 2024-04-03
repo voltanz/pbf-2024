@@ -3,19 +3,19 @@ import Section from "../atoms/section";
 
 export default function MainPage() {
     return (
-        <Section level={1}>
-            <Heading>Judul</Heading>
-            <Section level={2}>
+        <Section>
+            <Heading>Title</Heading>
+            <Section>
                 <Heading>Heading</Heading>
                 <Heading>Heading</Heading>
                 <Heading>Heading</Heading>
             </Section>
-            <Section level={3}>
+            <Section>
                 <Heading>Sub-Heading</Heading>
                 <Heading>Sub-Heading</Heading>
                 <Heading>Sub-Heading</Heading>
             </Section>
-            <Section level={4}>
+            <Section>
                 <Heading>Sub-sub-Heading</Heading>
                 <Heading>Sub-sub-Heading</Heading>
                 <Heading>Sub-sub-Heading</Heading>

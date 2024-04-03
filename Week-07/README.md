@@ -193,3 +193,84 @@ Terdapat error saat menjalan npm run dev karena kita belum menambahkan `"use cli
 Setelah menambahkan `use client`
 
 ![Output](img/ss5.png)
+
+### Langkah 6: Menggunakan dan menyediakan context dari komponen yang sama
+
+Saat ini, Anda masih harus menentukan setiap `level section` secara manual, karena context memungkinan Anda membaca informasi dari komponen di atasnya, setiap `Section` dapat membaca `level` dari `Section` di atasnya, dan mengoper `level + 1` ke bawah secara otomatis. Berikut adalah bagaimana Anda dapat melakukannya dengan mengubah sedikit kode pada komponen `Section`:
+```tsx
+import { LevelContext } from "@/utilities/context/mycontext";
+
+export default function Section({ children }: { children: any }) {
+    const level = useContext(LevelContext);
+    return (
+        <section className="section">
+            <LevelContext.Provider value={level}>
+                {children}
+            </LevelContext.Provider>
+        </section>
+    );
+}
+```
+Dengan perubahan ini, Anda tidak perlu mengoper prop level baik ke `< Section >` atau ke `< Heading >`:
+```tsx
+export default function MainPage() {
+    return (
+        <Section>
+            <Heading>Title</Heading>
+            <Section>
+                <Heading>Heading</Heading>
+                <Heading>Heading</Heading>
+                <Heading>Heading</Heading>
+            </Section>
+            <Section>
+                <Heading>Sub-Heading</Heading>
+                <Heading>Sub-Heading</Heading>
+                <Heading>Sub-Heading</Heading>
+            </Section>
+            <Section>
+                <Heading>Sub-sub-Heading</Heading>
+                <Heading>Sub-sub-Heading</Heading>
+                <Heading>Sub-sub-Heading</Heading>
+            </Section>
+        </Section>
+    );
+}
+```
+```tsx
+import { LevelContext } from "@/utilities/context/mycontext";
+import { useContext } from "react";
+
+export default function Heading({ children }: { children: any }) {
+    const level = useContext(LevelContext);
+    switch (level) {
+        case 0:
+            throw Error('Heading must be inside a Section!');
+        case 1:
+            return <h1>{children}</h1>;
+        case 2:
+            return <h2>{children}</h2>;
+        case 3:
+            return <h3>{children}</h3>;
+        case 4:
+            return <h4>{children}</h4>;
+        case 5:
+            return <h5>{children}</h5>;
+        case 6:
+            return <h6>{children}</h6>;
+        default:
+            throw Error('Unknown level: ' + level);
+    }
+}
+```
+Sekarang keduanya `Heading` dan `Section` membaca `LevelContext` untuk mencari tahu seberapa "dalam" mereka. Dan `Section` membungkus anaknya ke dalam `LevelContext` untuk menentukan bahwa apa pun yang ada di dalamnya berada pada level yang "lebih dalam".
+
+> Soal 3
+> Capture hasilnya dan buatlah laporan di README.md. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?
+> 
+> Jangan lupa push dengan pesan commit: "W07: Jawaban soal 3".
+
+Jawab: 
+
+![Output](img/ss6.png)
+
+Tidak ada perubahan dari segi tampilan
