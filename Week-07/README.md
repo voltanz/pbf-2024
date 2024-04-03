@@ -110,6 +110,68 @@ php artisan storage:link
 
 Maka akan muncul file/folder baru dengan nama `storage` yang mereferensikan ke dalam folder `storage/app/public`
 
+## Praktikum 2 - Membuat API Resources
+
+### Langkah 1 - Membuat API Resources
+
+Jalankan perintah berikut di terminal/CMD
+```
+php artisan make:resource PostResource
+```
+
+![Output](docs/laravel7.png)
+
+Jika perintah berhasil, makan akan terdapat 1 file resource baru dengan nama `PostResource.php` yang berada di dalam folder `app/Http/Resources`
+
+### Langkah 2 - Melakukan Custom API Resources
+ 
+Buka file `app/Http/Resources/PostResource.php`, kemudian ubah kode nya menjadi seperti berikut
+```php
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class PostResource extends JsonResource
+{
+    //define properti
+    public $status;
+    public $message;
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $status
+     * @param  mixed $message
+     * @param  mixed $resource
+     * @return void
+     */
+    public function __construct($status, $message, $resource)
+    {
+        parent::__construct($resource);
+        $this->status  = $status;
+        $this->message = $message;
+    }
+
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'success'   => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->resource
+        ];
+    }
+}
+```
+
+
 # Praktikum Nextjs
 
 ## Praktikum 1: Membuat Project Baru di Next.js
