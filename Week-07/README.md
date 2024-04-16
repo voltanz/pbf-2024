@@ -426,3 +426,171 @@ Jawab:
 
 Hasil Run
 ![Output](img/ss8.png)
+
+
+## Praktikum 3: Membuat Context Tema Light/Dark
+
+### Langkah 1: Membuat variabel tema
+
+Buatlah file dan folder baru di `src\utilities\themes\mythemes.tsx` yang berisi kode berikut.
+```tsx
+export const themes = {
+    'dark': {
+        background: 'black',
+        color: 'white',
+    },
+    'light':{
+        background: 'white',
+        color: 'black',
+    },
+};
+```
+Kemudian buatlah contextnya di file `src\utilities\contexts\mycontext.tsx`
+```tsx
+import { createContext } from "react";
+import { themes } from "../themes/mythemes";
+
+export const LevelContext = createContext(0);
+
+export const ThemeContext = createContext({
+    theme: themes.light,
+    toggleTheme: () => {},
+})
+```
+
+**Langkah 2: Buat komponen atom NavBar**
+
+Buatlah file baru di `src\components\atoms\navbar.tsx`
+```tsx
+import { useContext } from "react";
+import Link from "next/link";
+import { ThemeContext } from "@/app/utilities/contexts/mycontext";
+import { themes } from "@/app/utilities/themes/mythemes";
+
+
+
+export default function Navbar(){
+    const { toggleTheme, theme } = useContext(ThemeContext);
+    const newThemeName = theme === themes.dark ? 'light' : 'dark';
+    return(
+        <div 
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginBottom: 25
+            }}>
+            <div> My Website</div>
+            <div>
+                <Link href="/">Home</Link>
+                <Link href="/about">About</Link>
+                <Link href="/contacts"> Contacts</Link>
+                <Link href="/profile">Profile</Link>
+                <button onClick={toggleTheme}>Set {newThemeName} theme</button>
+            </div>
+        </div>
+    )
+}
+```
+
+**Langkah 3: Buat Provider**
+
+Buatlah provider di `src\components\atoms\myapp.tsx`
+```tsx
+'use client';
+import { ThemeContext } from "@/app/utilities/contexts/mycontext";
+import { useState } from "react";
+import Navbar from "./navbar";
+import { themes } from "@/app/utilities/themes/mythemes";
+
+
+export default function MyApp({ Component, pageProps }: { Component: any, pageProps: any }) {
+    const [theme, setTheme] = useState(themes.light);
+
+    const toggleTheme =() => {
+        setTheme(theme === themes.dark ? themes.light : themes.dark);  
+    };  
+    return (  
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>  
+            <div  
+                style={{  
+                    width: '100%',  
+                    minHeight: '100vh',  
+                    ...theme,  
+                }}>  
+                <Navbar />  
+                <Component {...pageProps} />  
+            </div>  
+        </ThemeContext.Provider>  
+    );  
+}  
+```
+
+**Langkah 4: Buat masing-masing page**
+
+Pindahkan komponen ProfilePage ke file `src\components\templates\profile_page.tsx`
+```tsx
+import Heading from "../atoms/heading";
+import Post from "../atoms/post";
+import Section2 from "../atoms/section2";
+import AllPosts from "../organisms/allpost";
+
+export default function ProfilePage(){
+    return(
+        <Section2 isFancy={true}>
+            <Heading>Profil Saya</Heading>
+            <Post 
+                title="Hello traveller!" 
+                body="Baca tentang petualangan saya"
+            />
+            <AllPosts/>
+        </Section2>
+    )
+}
+```
+Sehingga struktur folder di `templates` menjadi seperti berikut. Anda dapat berkreasi dengan konten pada `About` dan `Contacts`
+
+![Output](img/ss10.png)
+
+**Langkah 5: Buat routing**
+
+Buatlah folder dan file baru di dalam `app` agar routing page masing-masing dapat diakses seperti berikut.
+
+![Output](img/ss11.png)
+
+Gantilah isi kode pada `src\app\page.tsx` menjadi seperti berikut.
+```tsx
+"use client";
+import MyApp from "./components/atoms/myapp";
+import MainPage from "@/app/components/templates/main_page";
+
+export default function Home() {
+  return <MyApp Component={MainPage} pageProps={undefined}/>;
+}
+```
+Termasuk di masing-masing page `src\app\profile\page.tsx`, untuk page About dan Contacs silakan Anda sesuaikan.
+```tsx
+"use client";
+
+import MyApp from "../components/atoms/myapp";
+import ProfilePage from "../components/templates/profile_page";
+
+export default function Home() {
+    return <MyApp Component={ProfilePage} pageProps={undefined} />;
+}
+```
+
+Hasil Run
+![Output](img/ss9.gif)
+
+>Soal 5
+>
+>Silakan save semua dan lakukan running di browser Anda. Capture hasilnya dan buatlah laporan di **README.md**. Tambahkan teks Nama dan NIM pada setiap page routing agar menunjukkan itu hasil kerja Anda sendiri!
+>
+>1. Apakah `toggle button` tema sudah berfungsi ? jika belum, silakan perbaiki!
+>2. Mengapa ketika refresh atau berpindah halaman tema tidak permanen ? Buatlah menjadi permanen walaupun page sudah direfresh dan pindah halaman!
+>
+>**Jangan lupa push dengan pesan commit**: `"W07: Jawaban soal 5"`.
+
+Jawab:
+\

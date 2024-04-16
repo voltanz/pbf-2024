@@ -1,4 +1,4 @@
-import { LevelContext } from "@/utilities/context/mycontext";
+import { LevelContext } from "@/app/utilities/context/mycontext";
 import { useContext } from "react";
 
 export default function Section2({children, isFancy}: {children: any, isFancy: boolean}){
