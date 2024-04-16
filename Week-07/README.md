@@ -593,4 +593,6 @@ Hasil Run
 >**Jangan lupa push dengan pesan commit**: `"W07: Jawaban soal 5"`.
 
 Jawab:
-\
+
+Hasil Run
+![Output](img/ss12.gif)
